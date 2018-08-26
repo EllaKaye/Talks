@@ -1,0 +1,51 @@
+---
+title: "`bookdown` examples"
+author: "Ella Kaye"
+date: "20/11/2017"
+output: 
+  bookdown::pdf_document2:
+    toc: true
+header-includes:
+   - \usepackage{amsfonts}
+bibliography: "test_bib.bib"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Equations  {#sec:equations}
+
+\begin{equation} 
+  \mathbb{P}(X = k) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  (\#eq:binom)
+\end{equation}
+
+See Equation \@ref(eq:binom).
+
+# Theorems
+
+```{theorem, pythag, name="Pythagorean theorem"}
+For a right triangle, if $c$ denotes the length of the hypotenuse
+and $a$ and $b$ denote the lengths of the other two sides, we have
+$$a^2 + b^2 = c^2.$$
+```
+
+Theorem \@ref(thm:pythag) is very cool.
+
+# Section and text references
+
+In Section \@ref(sec:equations), I showed how to use equations.
+
+(ref:cars) A scatterplot of the data `cars` using **base** R graphics.
+
+```{r, cars, fig.cap = '(ref:cars)', echo = FALSE, fig.align='center'}
+plot(cars)
+```
+
+Figure \@ref(fig:cars) is a boring plot.
+
+# Citations
+@testbook wrote interesting stuff. This is an exciting discovery [@testarticle].
+
+# References
