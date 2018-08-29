@@ -1,0 +1,15 @@
+.large { font-size: 130% }
+.small { font-size: 70% }
+
+.title-slide h1 {
+  color: #fdf6e3;
+}
+
+.title-slide h2 {
+  color: #2aa198;
+}
+
+.title-slide h3 {
+  color: #6c71c4
+}
+

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Undergraduate Statistics Admissions at the University of Warwick</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Ella Kaye" />
+    <meta name="author" content="supervised by Julia Brettschneider and Anastasia Papavasiliou" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="my_css.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Undergraduate Statistics Admissions at the University of Warwick
+## RSS conference, Cardiff
+### Ella Kaye
+### supervised by Julia Brettschneider and Anastasia Papavasiliou
+### September 6th, 2018
+
+---
+
+
+
+
+
+
+
+
+
+class: inverse, center, middle
+
+# The Admissions Process
+
+---
+class: centre, middle
+
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="event_tree.pdf" alt="Event tree for the admissions process."  /&gt;
+&lt;p class="caption"&gt;Event tree for the admissions process.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# Aims
+
+- Model the university admissions process
+- Build a decision tool for the University of Warwick Statistics department to use during their admissions process
+
+    - 'best' students
+    - right number of them
+
+--
+
+## Some sub-questions    
+- Who is likely to meet the offer (predicting A-level results)?
+- Can we predict university performance from data available during the admissions period?
+
+---
+
+class: inverse, center, middle
+
+# Data
+
+---
+
+### **5031** applicants for the 2011 - 2016 admissions cycles
+
+--
+
+### **1089** enrolled
+
+--
+
+### **1022** take first year exams
+
+
+---
+
+# What predictors?
+
+--
+
+- **Academic**
+
+    - Further Mathematics result (where available)
+    - Best 'other' A-level result
+    - Whether they have a Physics/Chemisty A-level
+    - Number of A-level results
+    - Number of A\*/A grades at GCSE, for students with at least 8 GCSEs (imputed if missing)
+--
+
+- **Contextual**
+
+    - School Type (State/Grammar/Independent)
+    - POLAR3
+    - Index of Multiple Deprivation (IMD)
+
+--
+    
+- **Other**
+
+    - Gender
+    - Application period
+
+---
+
+class: inverse, center, middle
+
+
+# Predicting A-levels
+
+---
+
+
+
+
+
+
+
+
+
+
+
+# Making matches
+
+- Data are really messy
+    - Different ways of counting A-levels; hundreds of inconsistencies
+    - **4469** results without predictions and **963** predictions without results
+
+- Across all students and subjects, we can match **11530** predicted grades and results, for **3402** students.
+
+---
+
+class: center, middle
+
+## Predicted grades are
+
+.large[correct **54%** of the time] 
+
+.large[over-estimated **39%** of the time]
+
+.large[under-estimated **7%** of the time]  
+
+---
+# By subject
+
+&lt;img src="RSS_admissions_files/figure-html/pred-vs-rslt-fig-subj-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Can we do any better?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- Home students (those with home postcodes in England), who are taking at least 3 A-levels at a UK school (GCSE covariates imputed where necessary) **1320** of these.
+
+- Train on 80% on data, test on 20%.
+
+- Fit two logistic regression models for predicting A-level Mathematics result (A\* or lower):
+    - First with predicted grade as only covariate
+    - Second with predicted grade plus school type, average GCSE score, number of A-levels, whether they're taking Physics/Chemistry A-level, Gender and Application period.
+
+---
+# Can we do any better?
+
+- Second model is a significantly better fit to the data on the training set.
+- Teachers'/first model accuracy on test set is **70.1%**.
+- Accuracy on test set for second model is **72.3%**.
+
+--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- Repeating for predicting A\*/A at Further Maths, second model is a better fit on the training data, but not much in it on the test data (**76.2%** vs **77%**).
+---
+
+class: inverse, center, middle
+
+
+# Predicting university outcomes
+
+---
+
+
+
+# What outcomes?
+
+- Drop-out / non-engagement (binary)
+- Proceeding to the second year (binary)
+- Resits required (binary)
+- Good pass (binary)
+- Classification (ordered categories)
+- Year mark (percentage)
+
+---
+
+# Which students (for now)?
+- Home students (those with home postcodes in England), who are taking at least 3 A-levels at a UK school, who have achieved at least some marks towards at least some modules. There are **459** of these.
+
+    - We do not know how well students who were not admitted to Warwick would have done had they had the opportunity.
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Further Mathematics A-level --&gt;
+
+
+
+&lt;!-- --- --&gt;
+
+
+
+&lt;!-- # Proceed to second year --&gt;
+
+
+
+
+
+&lt;!-- - 29 proceed to 2nd year. 430 do not. --&gt;
+&lt;!-- - Fit a logistic regression model. --&gt;
+&lt;!-- - The only coefficients significant at 5% relate to A-level results:  --&gt;
+&lt;!--     - Having an A or lower in Further Maths A-level decreases the odds of proceeding by 2.9 relative to having an A\*. --&gt;
+&lt;!--     - The odds of proceeding is 8.3 times higher for those with Physics/Chemistry A-level than those without. Seems curiously high. --&gt;
+&lt;!-- - Fitted data: predicts everyone proceeds --&gt;
+&lt;!-- - LASSO: Only non-zero coefficients are the intercept and two significant ones above, both in same direction as logistic regression model, but smaller effect. --&gt;
+
+
+    
+
+
+&lt;!-- -- --&gt;
+
+&lt;!-- - Further considerations --&gt;
+&lt;!--     - When splitting into training and validation sets, start getting perfect separation of variables. Use bias-reduced GLMs instead? --&gt;
+&lt;!--     - Is not proceeding a rare event? Only 6.3% of this group do not progress. Use rare event logistic regression instead? --&gt;
+
+
+
+&lt;!-- - Linear regression  --&gt;
+&lt;!--     - FM result, best other A-level result and mean GCSE result all highly significant, in expected direction --&gt;
+&lt;!--     - Having four A-levels (as opposed to three) also beneficial, as is applying early. --&gt;
+&lt;!--     - That said, model is probably over-fitted and, looking at residuals, doesn't appear to be a very good fit. --&gt;
+
+---
+
+# First year degree classification
+
+
+
+- Proportional odds logistic regression model:
+
+$$
+\textrm{logit}[P(Y \leq j)] = \alpha_j - \beta x, \qquad j = 1, \ldots, J -1
+$$
+
+- Covariates significant at 5%:
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Variable &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; OR &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 2.5 % &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 97.5 % &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; FM (A or lower) - relative to A* &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.40 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.58 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; FM (no result) - relative to A* &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.32 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.98 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Best other A-level (A) - relative to A* &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.26 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.62 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Best other A-level (lower) - relative to A* &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.31 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.59 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Has Physics/Chemistry A-level &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.05 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.36 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Num A*/A at GCSE &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.31 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Male &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.34 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Late application - relative to early &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.26 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.79 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+???
+
+For any fixed classification level, the estimated odds that a male is in the higher direction is is 1.54 the estimated odds for a female.
+
+---
+
+# Considerations
+- Why are contextual factors that have found to be significant in the literature not significant here?
+
+- What about likely important factors that we do not have in the admissions data (e.g. personality traits, study habits, what happens once they are at university)?
+
+---
+class: center, middle
+
+# Thank you!
+## Any questions?
+
+
+## I'd love to hear from you!
+[E.Kaye.1@warwick.ac.uk](mailto:E.Kaye.1@warwick.ac.uk)
+
+[@ellamkaye](https://twitter.com/ellamkaye)
+
+[ellakaye.rbind.io](https://ellakaye.rbind.io)
+
+[github.com/EllaKaye](https://github.com/ellakaye)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
