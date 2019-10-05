@@ -230,25 +230,6 @@ washington_speeches_df &lt;- washington_speeches %&gt;%
 
 ---
 
-# A table of Washington's speeches
-
-
-```r
-washington_speeches_df
-```
-
-```
-## # A tibble: 4 x 2
-##   speech_name         speech                                               
-##   &lt;chr&gt;               &lt;chr&gt;                                                
-## 1 1790_01_08_Washing… "I embrace with great satisfaction the opportunity w…
-## 2 1790_12_08_Washing… " Fellow Citizens of the Senate and the House of Rep…
-## 3 1791_10_25_Washing… " Fellow Citizens of the Senate and the House of Rep…
-## 4 1792_11_08_Washing… " Fellow Citizens of the Senate and of the House of …
-```
-
----
-
 # Split into sentences...
 
 
@@ -471,7 +452,7 @@ wordcloud(words = washington_count$word, freq = washington_count$n,
           min.freq = 9, rot.per = 0.35, colors = brewer.pal(8, "YlGnBu"))
 ```
 
-![](text_in_R_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+![](text_in_R_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
 
 
 ---

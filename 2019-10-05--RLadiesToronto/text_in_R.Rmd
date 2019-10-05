@@ -191,14 +191,6 @@ washington_speeches_df <- washington_speeches %>%
 
 ---
 
-# A table of Washington's speeches
-
-```{r}
-washington_speeches_df
-```
-
----
-
 # Split into sentences...
 
 ```{r}
