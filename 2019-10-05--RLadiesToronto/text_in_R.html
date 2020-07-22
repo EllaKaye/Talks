@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="" xml:lang="">
   <head>
     <title>Working with text in R</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="Ella Kaye" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/rladies.css" rel="stylesheet" />
     <link href="libs/remark-css/rladies-fonts.css" rel="stylesheet" />
@@ -173,18 +174,18 @@ text_df
 
 ```
 ## # A tibble: 28 x 1
-##    sentence                                                                
-##    &lt;chr&gt;                                                                   
-##  1 i embrace with great satisfaction the opportunity which now presents it…
-##  2 the recent accession of the important state of north carolina to the co…
-##  3 in resuming your consultations for the general good you cannot but deri…
-##  4 still further to realize their expectations and to secure the blessings…
-##  5 among the many interesting objects which will engage your attention tha…
-##  6 to be prepared for war is one of the most effectual means of preserving…
-##  7 a free people ought not only to be armed but disciplined to which end a…
-##  8 the proper establishment of the troops which may be deemed indispensibl…
-##  9 in the arrangements which may be made respecting it it will be of impor…
-## 10 there was reason to hope that the pacific measures adopted with regard …
+##    sentence                                                                     
+##    &lt;chr&gt;                                                                        
+##  1 i embrace with great satisfaction the opportunity which now presents itself …
+##  2 the recent accession of the important state of north carolina to the constit…
+##  3 in resuming your consultations for the general good you cannot but derive en…
+##  4 still further to realize their expectations and to secure the blessings whic…
+##  5 among the many interesting objects which will engage your attention that of …
+##  6 to be prepared for war is one of the most effectual means of preserving peac…
+##  7 a free people ought not only to be armed but disciplined to which end a unif…
+##  8 the proper establishment of the troops which may be deemed indispensible wil…
+##  9 in the arrangements which may be made respecting it it will be of importance…
+## 10 there was reason to hope that the pacific measures adopted with regard to ce…
 ## # … with 18 more rows
 ```
 
@@ -240,18 +241,18 @@ washington_speeches_df %&gt;%
 
 ```
 ## # A tibble: 183 x 2
-##    speech_name         sentence                                            
-##    &lt;chr&gt;               &lt;chr&gt;                                               
-##  1 1790_01_08_Washing… i embrace with great satisfaction the opportunity w…
-##  2 1790_01_08_Washing… the recent accession of the important state of nort…
-##  3 1790_01_08_Washing… in resuming your consultations for the general good…
-##  4 1790_01_08_Washing… still further torealize their expectations and to s…
-##  5 1790_01_08_Washing… among the many interesting objects which will engag…
-##  6 1790_01_08_Washing… to be prepared for war is one of the most effectual…
-##  7 1790_01_08_Washing… a free people ought not only to be armed but discip…
-##  8 1790_01_08_Washing… the proper establishment of the troops which may be…
-##  9 1790_01_08_Washing… in the arrangements which may be made respecting it…
-## 10 1790_01_08_Washing… there was reason to hope that the pacific measures …
+##    speech_name         sentence                                                 
+##    &lt;chr&gt;               &lt;chr&gt;                                                    
+##  1 1790_01_08_Washing… i embrace with great satisfaction the opportunity which …
+##  2 1790_01_08_Washing… the recent accession of the important state of north car…
+##  3 1790_01_08_Washing… in resuming your consultations for the general good you …
+##  4 1790_01_08_Washing… still further torealize their expectations and to secure…
+##  5 1790_01_08_Washing… among the many interesting objects which will engage you…
+##  6 1790_01_08_Washing… to be prepared for war is one of the most effectual mean…
+##  7 1790_01_08_Washing… a free people ought not only to be armed but disciplined…
+##  8 1790_01_08_Washing… the proper establishment of the troops which may be deem…
+##  9 1790_01_08_Washing… in the arrangements which may be made respecting it it w…
+## 10 1790_01_08_Washing… there was reason to hope that the pacific measures adopt…
 ## # … with 173 more rows
 ```
 
@@ -267,7 +268,13 @@ washington_speeches_summary &lt;- washington_speeches_df %&gt;%
   group_by(speech_name) %&gt;%
   summarise(mean_sentence_length = mean(sentence_length)) %&gt;%
   separate(speech_name, sep = "_", into = c("Year", "Month", "Day", "President")) 
+```
 
+```
+## `summarise()` ungrouping output (override with `.groups` argument)
+```
+
+```r
 washington_speeches_summary
 ```
 
@@ -281,6 +288,10 @@ washington_speeches_summary
 ## 4 1792  11    08    Washington                 35.6
 ```
 
+
+```
+## `summarise()` ungrouping output (override with `.groups` argument)
+```
 
 ```
 ## # A tibble: 4 x 5
@@ -633,14 +644,14 @@ sample_n(frequency, 6)
 
 ```
 ## # A tibble: 6 x 3
-##   word           Jefferson Washington
-##   &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt;
-## 1 dependent       0.000562   0.000397
-## 2 exonerate      NA          0.000397
-## 3 mark            0.000281  NA       
-## 4 surrounded      0.000281  NA       
-## 5 congratulating NA          0.000397
-## 6 suggested      NA          0.000794
+##   word         Jefferson Washington
+##   &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
+## 1 frontier      0.000562   0.00159 
+## 2 disappointed  0.000281  NA       
+## 3 tennessee    NA          0.000397
+## 4 facilitated  NA          0.000397
+## 5 paris         0.000562  NA       
+## 6 confirmed     0.000281  NA
 ```
 
 
@@ -701,6 +712,7 @@ class: center, middle, inverse
 
 [github.com/EllaKaye](https://github.com/ellakaye)
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
@@ -710,16 +722,89 @@ class: center, middle, inverse
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
-})();</script>
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
-(function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -733,14 +818,15 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

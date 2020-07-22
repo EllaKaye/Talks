@@ -88,13 +88,13 @@ a, a > code {
 .inverse h1, .inverse h2, .inverse h3 {
   color: #fdf6e3;
 }
-
 .title-slide, .title-slide h1, .title-slide h2, .title-slide h3 {
   color: #fdf6e3;
 }
-
 .title-slide {
   background-color: #002b36;
+  
+  
   
 }
 .title-slide .remark-slide-number {
